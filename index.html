@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0px;
+      }
+      #hero {
+        width: 300px;
+        height: 100px;
+        border: 2px solid red;
+        position: relative;
+      }
+      #hero > img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+        animation-name: movetoleft;
+        animation-duration: 5s;
+        /* animation-timing-function: steps(7,jump-none); */
+        /* animation-iteration-count: infinite; */
+        /* transform: translateX(10%); */
+      }
+
+      @keyframes movetoleft {
+        0% {
+          transform: scale(0.2) rotateX(90deg);
+          /* transform: translateY(200%) rotate(90deg); */
+          opacity: 0;
+          /* background-color: red; */
+        }
+        /* 25% {
+          transform: scale(0.5);
+        } */
+        100% {
+          /* transform: translateY(0); */
+          opacity: 1;
+          /* transform: translateX(0%) rotate(0deg); */
+          /* transform: translateX(0%); */
+          /* background-color: yellow; */
+        }
+      }
+
+      /* @keyframes movetoleft { */
+      /* from { */
+      /* transform: scale(0.4); */
+      /* transform: translateY(200%) rotate(90deg); */
+      /* opacity: 0; */
+      /* background-color: red; */
+      /* } */
+      /* to { */
+      /* transform: translateY(0); */
+      /* opacity: 1; */
+      /* transform: translateX(0%) rotate(0deg); */
+      /* transform: translateX(0%); */
+      /* background-color: yellow; */
+      /* } */
+      /* } */
+
+      /* @keyframes example {
+        0% {
+          background-color: red;
+        }
+        25% {
+          background-color: yellow;
+        }
+        50% {
+          background-color: blue;
+        }
+        100% {
+          background-color: green;
+        }
+      } */
+
+      #heading {
+        /* border: 0.1px solid white; */
+        color: white;
+        width: fit-content;
+        border-radius: 12px;
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 15px;
+        /* font-size: 15vw; */
+        padding: 7px;
+        /* opacity: 0.5; */
+        backdrop-filter: blur(2px);
+      }
+      #heading > h3 {
+        font-weight: 300;
+      }
+      #navbar {
+        background: linear-gradient(90deg, red, orange);
+        padding: 10px 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #navlist {
+        list-style-type: none;
+        display: flex;
+        gap: 30px;
+        color: white;
+        font-size: 18px;
+        /* font-size: 2vw; */
+      }
+
+      #hamburger {
+        width: 30px;
+        height: 30px;
+        border: 1px solid white;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* gap: 3px; */
+        display: none;
+      }
+
+      #hamburger > div {
+        border: 2px solid white;
+        margin: 3px 0px;
+      }
+
+      /* 0---> 600px */
+      @media only screen and (max-width: 600px) {
+        body {
+          background-color: lightblue;
+        }
+        #navlist {
+          flex-direction: column;
+          gap: 10px;
+          padding-left: 0px;
+        }
+        #hamburger {
+          display: block;
+        }
+        .nav-item {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <ul id="navlist" style="list-style-type: none">
+        <li>Home</li>
+        <li class="nav-item">About</li>
+        <li class="nav-item">Contact Us</li>
+      </ul>
+      <div id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <!-- <button>Login</button> -->
+    </div>
+    <hr />
+    <hr />
+    <div id="hero">
+      <img src="i.webp" alt="" />
+      <div id="heading">
+        <h3>Hi How are you?</h3>
+      </div>
+    </div>
+  </body>
+</html>
