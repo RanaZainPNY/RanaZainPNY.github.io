@@ -75,12 +75,15 @@
         const submitBtn = document.getElementById('submit');
         submitBtn.addEventListener('click', function () {
             const phoneNumber = getPhoneNumberFromUserInput();
+            const countryCode = "+92";
+            phoneNumber = countryCode + phoneNumber;
             console.log(`Phone Number: ${phoneNumber}`);
             const appVerifier = window.recaptchaVerifier;
 
             signInWithPhoneNumber(auth, phoneNumber, appVerifier)
                 .then((confirmationResult) => {
                     // SMS sent. Prompt user to type the code from the message, then sign the
+                    alert('Please Enter the otp sent to you');
                     // user in with confirmationResult.confirm(code).
                     window.confirmationResult = confirmationResult;
                     // ...
