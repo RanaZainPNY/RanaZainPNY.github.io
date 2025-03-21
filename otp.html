@@ -37,9 +37,13 @@
         console.log("Fire base app initiallized properly ...");
         console.log(app);
 
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-           
+        import { getAuth } from "firebase/auth";
+
+        const auth = getAuth();
+        // auth.languageCode = 'it';
+        // To apply the default browser preference instead of explicitly setting it.
+        auth.useDeviceLanguage();
+
     </script>
 </body>
 
