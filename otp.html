@@ -36,6 +36,10 @@
         const analytics = getAnalytics(app);
         console.log("Fire base app initiallized properly ...");
         console.log(app);
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+           
     </script>
 </body>
 
