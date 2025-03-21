@@ -74,9 +74,7 @@
 
         const submitBtn = document.getElementById('submit');
         submitBtn.addEventListener('click', function () {
-            const phoneNumber = getPhoneNumberFromUserInput();
-            const countryCode = "+92";
-            phoneNumber = countryCode + phoneNumber;
+            const phoneNumber = "+92" + getPhoneNumberFromUserInput();
             console.log(`Phone Number: ${phoneNumber}`);
             const appVerifier = window.recaptchaVerifier;
 
@@ -94,6 +92,7 @@
                             // User signed in successfully.
                             const user = result.user;
                             console.log("User Signed in Successfully");
+
                             // ...
                         }).catch((error) => {
                             // User couldn't sign in (bad verification code?)
