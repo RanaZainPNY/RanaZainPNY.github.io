@@ -87,6 +87,18 @@
                     // user in with confirmationResult.confirm(code).
                     window.confirmationResult = confirmationResult;
                     // ...
+                    const verifyBtn = document.getElementById('verifysubmit');
+                    verifyBtn.addEventListener('click', function () {
+                        const code = document.getElementById('verfiy').value;
+                        confirmationResult.confirm(code).then((result) => {
+                            // User signed in successfully.
+                            const user = result.user;
+                            // ...
+                        }).catch((error) => {
+                            // User couldn't sign in (bad verification code?)
+                            // ...
+                        });
+                    })
 
                 }).catch((error) => {
                     // Error; SMS not sent
