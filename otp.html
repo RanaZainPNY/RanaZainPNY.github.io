@@ -11,10 +11,22 @@
 
 <body>
     <h1>OTP Verification</h1>
+    <div style="display:flex; gap: 45px;">
+        <div>
+            <input type="text" id="phone">
+            <div id="recaptcha-container"></div>
+            <button id="submit">Submit</button>
+        </div>
+        <div>
+            <input type="text" id="verify">
+            <button id="verifysubmit">Verify</button>
+        </div>
+    </div>
 
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
@@ -34,15 +46,67 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-        console.log("Fire base app initiallized properly ...");
-        console.log(app);
-
-        import { getAuth } from "firebase/auth";
-
-        const auth = getAuth();
+        // Initialize Firebase Authentication and get a reference to the service
+        const auth = getAuth(app);
         // auth.languageCode = 'it';
-        // To apply the default browser preference instead of explicitly setting it.
+        // window.auth = auth;
         auth.useDeviceLanguage();
+        console.log(auth);
+
+
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            'size': 'normal',
+            'callback': (response) => {
+                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                // ...
+            },
+            'expired-callback': () => {
+                // Response expired. Ask user to solve reCAPTCHA again.
+                // ...
+                alert('solve captcha and then proceed');
+            }
+        });
+
+        recaptchaVerifier.render().then((widgetId) => {
+            window.recaptchaWidgetId = widgetId;
+        });
+
+
+        const submitBtn = document.getElementById('submit');
+        submitBtn.addEventListener('click', function () {
+            const phoneNumber = getPhoneNumberFromUserInput();
+            console.log(`Phone Number: ${phoneNumber}`);
+            const appVerifier = window.recaptchaVerifier;
+
+            signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+                .then((confirmationResult) => {
+                    // SMS sent. Prompt user to type the code from the message, then sign the
+                    // user in with confirmationResult.confirm(code).
+
+                    window.confirmationResult = confirmationResult;
+                    // ...
+
+                }).catch((error) => {
+                    // Error; SMS not sent
+                    // ...
+                });
+
+
+
+        })
+
+
+        function getPhoneNumberFromUserInput() {
+            var phoneElem = document.getElementById('phone');
+            return phoneElem.value;
+        }
+
+
+
+
+
+
+
 
     </script>
 </body>
